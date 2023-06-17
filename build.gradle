@@ -84,7 +84,6 @@ ext.readScmInfo = { proj ->
       return [
           'Source-Repository': git.branch.current.name,
           'Source-Revision'  : git.head().id,
-          'Source-Date'      : git.head().date.format('yyyy-MM-dd HH:mm:ss Z')
       ] as Properties
     } finally {
       git.close()
