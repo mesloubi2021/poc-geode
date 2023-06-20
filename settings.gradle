@@ -136,12 +136,17 @@ if (GradleVersion.current() < GradleVersion.version(minimumGradleVersion)) {
   throw new GradleException('Running with unsupported Gradle Version. Use Gradle Wrapper or with Gradle version >= ' + minimumGradleVersion)
 }
 
-buildCache {
-  local {
-    enabled = !isCI
-  }
+//buildCache {
+//  local {
+//    enabled = !isCI
+//  }
+//
+//  remote(gradleEnterprise.buildCache) {
+//    enabled = false
+//  }
+//}
 
-  remote(gradleEnterprise.buildCache) {
-    enabled = false
-  }
+buildCache {
+    local { enabled = false }
+    remote(gradleEnterprise.buildCache) { enabled = false }
 }
