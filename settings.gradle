@@ -147,6 +147,6 @@ if (GradleVersion.current() < GradleVersion.version(minimumGradleVersion)) {
 //}
 
 buildCache {
-    local { enabled = false }
+    local { enabled = true }
     remote(gradleEnterprise.buildCache) { enabled = false }
 }
