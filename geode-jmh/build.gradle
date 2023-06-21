@@ -17,7 +17,7 @@
 
 
 plugins {
-  id 'java-library' ; //TODO
+  id 'java-library'; //TODO
   id 'standard-subproject-configuration'
   id 'geode-publish-java'
   id 'warnings'
@@ -41,16 +41,29 @@ jar {
   }
 }
 
+class JavaAgentProvider implements CommandLineArgumentProvider {
+  @InputFile
+  @PathSensitive(PathSensitivity.RELATIVE)
+  File javaAgent
+
+  @Override
+  Iterable<String> asArguments() {
+    ["-javaagent:${javaAgent}"]
+  }
+}
+
 test {
-  jvmArgs += [
-    '-javaagent:' + jar.outputs.files.singleFile
-  ]
+  jvmArgumentProviders.add(
+      new JavaAgentProvider(javaAgent: jar.outputs.files.singleFile)
+      )
+
   dependsOn jar
 }
 
 repeatUnitTest {
-  jvmArgs += [
-    '-javaagent:' + jar.outputs.files.singleFile
-  ]
+  jvmArgumentProviders.add(
+      new JavaAgentProvider(javaAgent: jar.outputs.files.singleFile)
+      )
+
   dependsOn jar
 }
