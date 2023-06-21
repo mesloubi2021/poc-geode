@@ -42,9 +42,8 @@ jar {
 }
 
 class JavaAgentProvider implements CommandLineArgumentProvider {
-  @InputFile
-  @PathSensitive(PathSensitivity.RELATIVE)
-  File javaAgent
+    @Classpath
+    File javaAgent
 
   @Override
   Iterable<String> asArguments() {
