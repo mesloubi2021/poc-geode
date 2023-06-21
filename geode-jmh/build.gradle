@@ -43,14 +43,14 @@ jar {
 
 test {
   jvmArgs += [
-    '-javaagent:' + jar.outputs.files.singleFile
+    '-javaagent:' + jar.outputs.files.singleFile.relativePath(project.getRootDir())
   ]
   dependsOn jar
 }
 
 repeatUnitTest {
   jvmArgs += [
-    '-javaagent:' + jar.outputs.files.singleFile
+    '-javaagent:' + jar.outputs.files.singleFile.relativePath(project.getRootDir())
   ]
   dependsOn jar
 }
